@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   THEME TOKENS
+   ---------------------------------------------------------------------
+   Every colour in the application resolves through these variables.
+   To re-theme the whole product later, change values here only —
+   no component file needs to be touched.
+   ===================================================================== */
+:root {
+  /* ---- Surfaces ---------------------------------------------------- */
+  --background:       #FAF7F1;   /* warm ivory canvas */
+  --surface:          #FFFFFF;   /* cards and panels  */
+  --surface-muted:    #F4EDE3;   /* inactive tabs, subtle controls */
+  --surface-inverse:  #123C2C;
+  --border:           #E5D8C8;
+  --border-strong:    #D9C9B4;
+
+  /* ---- Text -------------------------------------------------------- */
+  --foreground:       #171717;
+  --muted:            #6F6A63;
+  --subtle:           #786F66;   /* AA on the cream ground */
+
+  /* ---- Brand ------------------------------------------------------- */
+  --primary:          #195743;
+  --primary-hover:    #124233;
+  --primary-soft:     #E7EFEB;
+  --primary-foreground: #FAF7F1;
+
+  /* Gold, taken from the logo. Tertiary only — never a second accent
+     competing with the green. */
+  --accent:           #B89048;
+  --accent-hover:     #9E7A38;
+  --accent-soft:      #F7EEDD;
+  --accent-foreground:#3A2B0F;
+
+  /* ---- Status ------------------------------------------------------ */
+  --success:          #1F7A4C;
+  --success-soft:     #E4F0EA;
+  --warning:          #A8710F;
+  --warning-soft:     #FAEFDA;
+  --danger:           #A93226;
+  --danger-soft:      #F8E7E4;
+
+  /* ---- Calligraphy watermark --------------------------------------- */
+  --calligraphy:      #1E5A48;
+
+  --ring:             #195743;
+  --radius:           0.875rem;
+
+  /* Comfortable reading column. The cream margin either side is where
+     the background letterforms live, so pages must not span the viewport. */
+  --container:        60rem;   /* 960px */
+}
+
+@theme inline {
+  --color-background:      var(--background);
+  --color-surface:         var(--surface);
+  --color-surface-muted:   var(--surface-muted);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-border-soft:     var(--border);
+  --color-border-strong:   var(--border-strong);
+
+  --color-foreground:      var(--foreground);
+  --color-muted:           var(--muted);
+  --color-subtle:          var(--subtle);
+
+  --color-primary:            var(--primary);
+  --color-primary-hover:      var(--primary-hover);
+  --color-primary-soft:       var(--primary-soft);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent:            var(--accent);
+  --color-accent-hover:      var(--accent-hover);
+  --color-accent-soft:       var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success:      var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning:      var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger:       var(--danger);
+  --color-danger-soft:  var(--danger-soft);
+  --color-calligraphy:  var(--calligraphy);
+
+  --font-sans:    var(--font-body);
+  --font-display: var(--font-display);
+
+  --radius-card: var(--radius);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+    letter-spacing: -0.015em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  /* Tabular numerals keep clocks and countdowns from jittering */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
+@layer utilities {
+  .card-shadow {
+    box-shadow: 0 1px 2px rgb(25 87 67 / 0.035);
+  }
+  .card-shadow-lg {
+    box-shadow:
+      0 1px 2px rgb(25 87 67 / 0.04),
+      0 12px 32px -18px rgb(25 87 67 / 0.14);
+  }
+  /* Standard page column. Every route uses this so the cream margin —
+     where the calligraphy sits — stays consistent across the app. */
+  .page-container {
+    margin-inline: auto;
+    width: 100%;
+    max-width: var(--container);
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .page-container { padding-inline: 1.5rem; }
+  }
+
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background: var(--border-strong); border-radius: 999px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

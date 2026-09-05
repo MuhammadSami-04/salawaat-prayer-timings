@@ -85,6 +85,7 @@
 
   --font-sans:    var(--font-body);
   --font-display: var(--font-display);
+  --font-arabic:  var(--font-arabic);
 
   --radius-card: var(--radius);
 }
@@ -148,6 +149,55 @@
   .scrollbar-slim::-webkit-scrollbar-thumb {
     background: var(--border-strong); border-radius: 999px;
   }
+}
+
+@layer utilities {
+  /* ---- Loading screen: the Durood ---------------------------------- */
+
+  /* Depth without gloss: a bright top edge lifts the strokes off the
+     cream, and two soft green shadows sit them back down onto it. */
+  .durood-depth {
+    text-shadow:
+      0 1px 0 rgb(255 255 255 / 0.85),
+      0 2px 3px rgb(25 87 67 / 0.10),
+      0 8px 18px rgb(25 87 67 / 0.07);
+  }
+
+  .durood-enter {
+    animation: durood-enter 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .durood-float {
+    animation: durood-float 7s ease-in-out 1s infinite;
+  }
+  .durood-echo {
+    animation: durood-echo 7s ease-in-out 1s infinite;
+  }
+  .loading-dot {
+    animation: loading-dot 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes durood-enter {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* A slow rise and fall — closer to breathing than to motion. */
+@keyframes durood-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* The blurred layer behind drifts a little further, so the depth reads as
+   parallax rather than a static drop shadow. */
+@keyframes durood-echo {
+  0%, 100% { opacity: 0.16; transform: translateY(2px) scale(1.004); }
+  50%      { opacity: 0.10; transform: translateY(-3px) scale(1.008); }
+}
+
+@keyframes loading-dot {
+  0%, 100% { opacity: 0.22; transform: scale(0.82); }
+  50%      { opacity: 0.85; transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {

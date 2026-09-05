@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Fraunces, Amiri } from "next/font/google";
 import "./globals.css";
 import { CalligraphyBackground } from "@/components/ui/CalligraphyBackground";
 
@@ -13,6 +13,17 @@ const display = Fraunces({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-display",
+  display: "swap",
+});
+
+/**
+ * Naskh calligraphic face. Used for the Durood on the loading screen, where
+ * the vocalisation marks need a type that positions them properly.
+ */
+const arabic = Amiri({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-arabic",
   display: "swap",
 });
 
@@ -36,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${body.variable} ${display.variable}`}
+      className={`${body.variable} ${display.variable} ${arabic.variable}`}
     >
       <body className="min-h-dvh bg-background antialiased">
         <CalligraphyBackground />

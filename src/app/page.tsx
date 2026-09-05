@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { SiteHeader } from "@/components/public/SiteHeader";
 import { SetupNotice } from "@/components/public/SetupNotice";
-import { UpcomingPrayersFeed } from "@/components/public/UpcomingPrayersFeed";
+import { CampusSearch } from "@/components/public/CampusSearch";
 import { LiveClock } from "@/components/public/LiveClock";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { getBoardsForDate } from "@/lib/queries";
@@ -42,7 +42,7 @@ export default async function HomePage() {
           <SetupNotice />
         ) : (
           <div className="space-y-4">
-            <UpcomingPrayersFeed boards={boards} limit={20} />
+            <CampusSearch boards={boards} />
 
             <Link
               href="/locations"

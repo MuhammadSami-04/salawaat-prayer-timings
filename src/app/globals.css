@@ -154,45 +154,43 @@
 @layer utilities {
   /* ---- Loading screen: the Durood ---------------------------------- */
 
-  /* Depth without gloss: a bright top edge lifts the strokes off the
-     cream, and two soft green shadows sit them back down onto it. */
-  .durood-depth {
-    text-shadow:
-      0 1px 0 rgb(255 255 255 / 0.85),
-      0 2px 3px rgb(25 87 67 / 0.10),
-      0 8px 18px rgb(25 87 67 / 0.07);
+  /*
+   * Reveals the phrase from the right, in the direction Arabic is written,
+   * by sliding an over-wide gradient mask across it. The soft edge of the
+   * gradient reads as a nib laying down ink rather than a hard wipe.
+   */
+  .durood-write {
+    -webkit-mask-image: linear-gradient(
+      to left, #000 0%, #000 50%, rgb(0 0 0 / 0.28) 55%, transparent 60%, transparent 100%);
+    mask-image: linear-gradient(
+      to left, #000 0%, #000 50%, rgb(0 0 0 / 0.28) 55%, transparent 60%, transparent 100%);
+    -webkit-mask-size: 230% 100%;
+    mask-size: 230% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+    animation: durood-write 2.6s cubic-bezier(0.33, 0.9, 0.4, 1) 0.2s forwards;
   }
 
-  .durood-enter {
-    animation: durood-enter 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .durood-settle {
+    animation: durood-settle 8s ease-in-out 2.9s infinite;
   }
-  .durood-float {
-    animation: durood-float 7s ease-in-out 1s infinite;
-  }
-  .durood-echo {
-    animation: durood-echo 7s ease-in-out 1s infinite;
-  }
+
   .loading-dot {
     animation: loading-dot 1.4s ease-in-out infinite;
   }
 }
 
-@keyframes durood-enter {
-  from { opacity: 0; transform: translateY(10px) scale(0.985); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes durood-write {
+  from { -webkit-mask-position: 0% 0;   mask-position: 0% 0; }
+  to   { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
 }
 
-/* A slow rise and fall — closer to breathing than to motion. */
-@keyframes durood-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-5px); }
-}
-
-/* The blurred layer behind drifts a little further, so the depth reads as
-   parallax rather than a static drop shadow. */
-@keyframes durood-echo {
-  0%, 100% { opacity: 0.16; transform: translateY(2px) scale(1.004); }
-  50%      { opacity: 0.10; transform: translateY(-3px) scale(1.008); }
+/* Once written, it breathes — slow enough to read as stillness. */
+@keyframes durood-settle {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-6px) scale(1.008); }
 }
 
 @keyframes loading-dot {

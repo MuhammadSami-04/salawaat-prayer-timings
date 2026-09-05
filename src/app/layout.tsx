@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces, Amiri } from "next/font/google";
+import { Inter, Fraunces, Aref_Ruqaa } from "next/font/google";
 import "./globals.css";
 import { CalligraphyBackground } from "@/components/ui/CalligraphyBackground";
 
@@ -17,10 +17,10 @@ const display = Fraunces({
 });
 
 /**
- * Naskh calligraphic face. Used for the Durood on the loading screen, where
- * the vocalisation marks need a type that positions them properly.
+ * Aref Ruqaa — a ruqaa calligraphic face, used for the Durood on the
+ * loading screen. Its stroke contrast reads as written rather than typeset.
  */
-const arabic = Amiri({
+const arabic = Aref_Ruqaa({
   subsets: ["arabic"],
   weight: ["400", "700"],
   variable: "--font-arabic",

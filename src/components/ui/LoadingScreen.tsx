@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 /** Durood Sharif, shown while the app is fetching. */
 const DUROOD = "صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ";
 
+const DUROOD_SIZE = "clamp(2.4rem, 8vw, 5.25rem)";
+
 /**
  * The loading state.
  *
@@ -10,10 +12,9 @@ const DUROOD = "صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ �
  * and quiet beneath it. The page's own cream ground and calligraphic
  * watermark show through — this component draws no background of its own.
  *
- * Depth comes from two stacked copies of the text: a blurred green echo
- * behind, and the crisp glyphs in front carrying a light top edge and two
- * soft shadows. The two layers drift at slightly different rates, so the
- * effect reads as gentle parallax rather than a static drop shadow.
+ * The phrase writes itself in from the right, the direction Arabic is
+ * written, then settles into a slow breath. There is no shadow: the ruqaa
+ * stroke contrast carries the weight on its own.
  *
  * `variant="inline"` is for pages that render inside the dashboard shell,
  * where the header and navigation are already on screen.
@@ -34,36 +35,23 @@ export function LoadingScreen({
         variant === "full" ? "min-h-[70dvh] py-16" : "py-24",
       )}
     >
-      <div className="durood-enter max-w-[22ch] sm:max-w-none">
-        <div className="durood-float relative" style={{ textWrap: "balance" }}>
-          {/* Blurred echo, purely for depth */}
-          <span
-            aria-hidden="true"
-            lang="ar"
-            dir="rtl"
-            className="durood-echo pointer-events-none absolute inset-0 select-none font-arabic text-primary blur-[7px]"
-            style={{ fontSize: "clamp(1.75rem, 5.2vw, 3.15rem)", lineHeight: 1.85 }}
-          >
-            {DUROOD}
-          </span>
-
-          <span
-            lang="ar"
-            dir="rtl"
-            className="durood-depth relative block font-arabic text-primary"
-            style={{ fontSize: "clamp(1.75rem, 5.2vw, 3.15rem)", lineHeight: 1.85 }}
-          >
-            {DUROOD}
-          </span>
-        </div>
+      <div className="durood-settle">
+        <span
+          lang="ar"
+          dir="rtl"
+          className="durood-write block max-w-[16ch] font-arabic text-primary sm:max-w-none"
+          style={{ fontSize: DUROOD_SIZE, lineHeight: 1.7, textWrap: "balance" }}
+        >
+          {DUROOD}
+        </span>
       </div>
 
       {/* Secondary, and kept that way */}
-      <div className="mt-9 flex items-center gap-1.5" aria-hidden="true">
+      <div className="mt-10 flex items-center gap-1.5" aria-hidden="true">
         {[0, 1, 2].map((i) => (
           <span
             key={i}
-            className="loading-dot h-1.5 w-1.5 rounded-full bg-primary"
+            className="loading-dot h-1.5 w-1.5 rounded-full bg-primary/70"
             style={{ animationDelay: `${i * 0.18}s` }}
           />
         ))}
